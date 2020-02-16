@@ -7,7 +7,8 @@ class AddTodo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: ''
+      inputValue: '',
+      categoryName: ''
     }
   }
 
@@ -19,20 +20,48 @@ class AddTodo extends Component {
   };
 
   handleSubmitForm = (e) => {
-    e.preventDefault()
-    this.props.actions.addTodo(this.state.inputValue)
-    console.log(this.props)
+    e.preventDefault();
+    if (!this.state.inputValue.trim()) {
+      return
+    }
+    this.props.actions.addTodo(this.state.inputValue);
     this.setState({
       inputValue:''
+    })
+  }
+
+  handleInputCategoryAdd = (e) => {
+    const { value } = e.target;
+    this.setState({
+      categoryName: value
+    })
+  };
+
+  handleSubmitCategoryForm = (e) => {
+    e.preventDefault();
+    if (!this.state.categoryName.trim()) {
+      return
+    }
+    this.props.actions.addCategory(this.state.categoryName);
+    this.setState({
+      categoryName:''
     })
   }
 
   render() {
     return (
       <div>
+        Add task
         <form onSubmit={this.handleSubmitForm}>
           <input type="text" value={this.state.inputValue} onChange={this.handleInputTextAdd}/>
         </form>
+        Add category
+        <form onSubmit={this.handleSubmitCategoryForm}>
+          <input type="text" value={this.state.categoryName} onChange={this.handleInputCategoryAdd}/>
+        </form>
+        {/* {this.props.toDoData.categories.defaultCategory.map(todo => (
+          <p key={todo.id}>{todo.text}</p>
+        ))} */}
       </div>
     )
   }

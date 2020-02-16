@@ -1,14 +1,26 @@
+import uuid from 'react-uuid'
 export const ADD_TODO = "ADD_TODO"
+export const ADD_CATEGORY = "ADD_CATEGORY"
 
-let nextTodoId = 0
 export function addTodo(text, category = "defaultCategory") {
   return {
     type: 'ADD_TODO',
-    id: nextTodoId++,
+    id: uuid(),
     text,
     category
   }
 }
+
+export function addCategory(text) {
+  return {
+    type: 'ADD_CATEGORY',
+    id: uuid(),
+    text,
+  }
+}
+
+
+
 export const setVisibilityFilter = filter => ({
   type: 'SET_VISIBILITY_FILTER',
   filter
