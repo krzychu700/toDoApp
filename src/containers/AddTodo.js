@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 import * as actions from "../actions/index";
+import { Item } from "../components/Item";
 
 class AddTodo extends Component {
   constructor(props) {
@@ -59,9 +60,17 @@ class AddTodo extends Component {
         <form onSubmit={this.handleSubmitCategoryForm}>
           <input type="text" value={this.state.categoryName} onChange={this.handleInputCategoryAdd}/>
         </form>
-        {/* {this.props.toDoData.categories.defaultCategory.map(todo => (
-          <p key={todo.id}>{todo.text}</p>
-        ))} */}
+        <div>
+          {this.props.toDoData.categories.defaultCategory[0].text}
+          {Object.keys(this.props.toDoData.categories).map((category, index) => (
+            <div key={index}>
+              <p >{category}</p>
+              {this.props.toDoData.categories[category].map(element => (
+                <Item key={element.id} text={element.text}/>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     )
   }

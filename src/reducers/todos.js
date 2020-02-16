@@ -1,6 +1,6 @@
 const initialState = {
   categories:{
-    defaultCategory: [],
+    defaultCategory: [{id: "32dsa", text: "test"}],
   },
   test: 0,
 }
@@ -9,7 +9,8 @@ const todos = (state = initialState, action) => {
     case 'ADD_TODO': {
       const category = action.category;
       const searchingCategory = Object.keys(state.categories).find(key => key === category)
-      return {...state, categories: {[searchingCategory]: [...state.categories[searchingCategory], {
+      return {...state, categories: {...state.categories,
+        [searchingCategory]: [...state.categories[searchingCategory], {
           id: action.id,
           text: action.text,
           completed: false
