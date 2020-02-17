@@ -84,17 +84,19 @@ class AddTodo extends Component {
   render() {
     return (
       <div className="container">
-        Add task
-        <form onSubmit={this.handleSubmitForm}>
-          <input type="text" value={this.state.inputValue} onChange={this.handleInputTextAdd}/>
-        </form>
-        <div>
-
-              {/* {this.props.toDoData.categories[category].map(element => (
-                <Item key={element.id} text={element.text}/>
-              ))} */}
-            
-
+        <div className="tasks_container">
+          <div className="newTask_container">
+            Add new task
+            <form onSubmit={this.handleSubmitForm}>
+              <input type="text" value={this.state.inputValue} onChange={this.handleInputTextAdd}/>
+            </form>
+          </div>
+          <div className="allTasks_container">
+            {this.props.toDoData.categories[this.props.toDoData.activeCategory].length > 0 ? "" : "This category is empty"}
+            {this.props.toDoData.categories[this.props.toDoData.activeCategory].map(element => (
+              <Item key={element.id} text={element.text}/>
+            ))}
+          </div>
         </div>
         <div className="sidebar">
           <p className="sidebar_text">categories</p>

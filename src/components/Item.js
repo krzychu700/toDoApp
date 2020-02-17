@@ -1,9 +1,10 @@
 import React from "react";
+import "./style.scss";
 
 export const Item = (props) => {
     return (
-    <div>
-      <p>Task: {props.text}</p>
+    <div className="item_container">
+      <p>{props.text}</p>
     </div>
     );
 }
