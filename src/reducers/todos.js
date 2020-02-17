@@ -3,7 +3,6 @@ const initialState = {
     default: [],
   },
   activeCategory: 'default',
-  test: 0,
 }
 const todos = (state = initialState, action) => {
   switch (action.type) {
