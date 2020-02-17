@@ -33,6 +33,18 @@ class ListItems extends Component {
       inputValue:''
     })
   }
+
+  handleInputBlur = () => {
+    if (!this.state.inputValue.trim()) {
+      return
+    } else {
+      this.props.actions.addTodo(this.state.inputValue);
+      this.setState({
+        inputValue:''
+      })
+    }
+  }
+
   render() {
     return (
       <>
@@ -41,7 +53,7 @@ class ListItems extends Component {
             <div className="newTask_container">
               Add new task
               <form onSubmit={this.handleSubmitForm}>
-                <input type="text" value={this.state.inputValue} onChange={this.handleInputTextAdd}/>
+                <input type="text" value={this.state.inputValue} onChange={this.handleInputTextAdd} onBlur={this.handleInputBlur}/>
               </form>
             </div>
             <div className="allTasks_container">
@@ -50,6 +62,21 @@ class ListItems extends Component {
                 <Item key={element.id} text={element.text}/>
               ))}
             </div>
+          </>
+        }
+        {this.props.toDoData.activeCategory === "All tasks" &&
+          <>
+            {Object.keys(this.props.toDoData.categories).map((category, index) => (
+              <div key={index} className="Alltasks_container">
+                <p className="list_category_text">{category}</p>
+                  <div className="list_item">
+                    {this.props.toDoData.categories[category].map(element => (
+                      <Item key={element.id} text={element.text}/>
+                    ))}
+                  </div>
+              </div>
+              
+            ))}
           </>
         }
       </>
