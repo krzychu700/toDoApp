@@ -1,8 +1,8 @@
 const initialState = {
   categories:{
-    defaultCategory: [{id: "32dsa", text: "test"}],
+    default: [],
   },
-  activeCategory: 'defaultCategory',
+  activeCategory: 'default',
   test: 0,
 }
 const todos = (state = initialState, action) => {
@@ -27,7 +27,6 @@ const todos = (state = initialState, action) => {
     }
     case 'ACTIVE_CATEGORY': {
       const newActiveCategory = action.name;
-      console.log(newActiveCategory)
       return Object.assign({}, state, {
         activeCategory: newActiveCategory
       })

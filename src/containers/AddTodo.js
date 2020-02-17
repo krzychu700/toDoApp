@@ -3,13 +3,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 import * as actions from "../actions/index";
 import { Item } from "../components/Item";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFolder } from '@fortawesome/free-regular-svg-icons';
+import { faPlus} from '@fortawesome/free-solid-svg-icons';
+import "./style.scss";
 
 class AddTodo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputValue: '',
-      categoryName: ''
+      categoryName: '',
+      activeCategoryInput: false
     }
   }
 
@@ -41,11 +46,14 @@ class AddTodo extends Component {
   handleSubmitCategoryForm = (e) => {
     e.preventDefault();
     if (!this.state.categoryName.trim()) {
-      return
+      this.setState({
+        activeCategoryInput: false
+      })
     }
     this.props.actions.addCategory(this.state.categoryName);
     this.setState({
-      categoryName:''
+      categoryName:'',
+      activeCategoryInput: false
     })
   }
 
@@ -53,27 +61,72 @@ class AddTodo extends Component {
     this.props.actions.activeCategory(e.target.id)
   }
 
+  handleInputBlur = () => {
+    if (!this.state.categoryName.trim()) {
+      this.setState({
+        activeCategoryInput: false
+      })
+    } else {
+      this.props.actions.addCategory(this.state.categoryName);
+      this.setState({
+        categoryName:'',
+        activeCategoryInput: false
+      })
+    }
+  }
+
+  handleOpenCategoryInput = () => {
+    this.setState({
+      activeCategoryInput: true
+    })
+  }
+
   render() {
     return (
-      <div>
+      <div className="container">
         Add task
         <form onSubmit={this.handleSubmitForm}>
           <input type="text" value={this.state.inputValue} onChange={this.handleInputTextAdd}/>
         </form>
-        Add category
-        <form onSubmit={this.handleSubmitCategoryForm}>
-          <input type="text" value={this.state.categoryName} onChange={this.handleInputCategoryAdd}/>
-        </form>
         <div>
-          {this.props.toDoData.categories.defaultCategory[0].text}
-          {Object.keys(this.props.toDoData.categories).map((category, index) => (
-            <div key={index}>
-              <p onClick={this.handleCategoryActiveChange} id={category}>{category}</p>
-              {this.props.toDoData.categories[category].map(element => (
+
+              {/* {this.props.toDoData.categories[category].map(element => (
                 <Item key={element.id} text={element.text}/>
-              ))}
+              ))} */}
+            
+
+        </div>
+        <div className="sidebar">
+          <p className="sidebar_text">categories</p>
+          {Object.keys(this.props.toDoData.categories).map((category, index) => (
+            <div
+              key={index}
+              className={this.props.toDoData.activeCategory === category ? "category_container category_container-active" : "category_container"}
+              onClick={this.handleCategoryActiveChange}
+              id={category}>
+
+              <FontAwesomeIcon icon={faFolder} className="category_icon"/>
+              <p className="category_text">{category}</p>
             </div>
           ))}
+          {this.state.activeCategoryInput === false &&
+            <div onClick={this.handleOpenCategoryInput} className="add_categoryButton">
+              <FontAwesomeIcon icon={faPlus} className="category_icon"/>
+              <p className="category_text">Add category</p>
+            </div>
+          }
+          {this.state.activeCategoryInput === true &&
+            <form onSubmit={this.handleSubmitCategoryForm} className="category_form">
+              <input
+                type="text"
+                autoFocus
+                maxLength={20}
+                placeholder="Start typing..."
+                value={this.state.categoryName}
+                onChange={this.handleInputCategoryAdd}
+                onBlur={this.handleInputBlur}/>
+            </form>
+          }
         </div>
       </div>
     )
