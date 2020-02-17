@@ -49,6 +49,10 @@ class AddTodo extends Component {
     })
   }
 
+  handleCategoryActiveChange = (e) => {
+    this.props.actions.activeCategory(e.target.id)
+  }
+
   render() {
     return (
       <div>
@@ -64,7 +68,7 @@ class AddTodo extends Component {
           {this.props.toDoData.categories.defaultCategory[0].text}
           {Object.keys(this.props.toDoData.categories).map((category, index) => (
             <div key={index}>
-              <p >{category}</p>
+              <p onClick={this.handleCategoryActiveChange} id={category}>{category}</p>
               {this.props.toDoData.categories[category].map(element => (
                 <Item key={element.id} text={element.text}/>
               ))}
