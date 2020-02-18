@@ -10,7 +10,7 @@ import "./style.scss";
 class Item extends Component {
 
   handleCompleteTask = () => {
-    this.props.actions.toggleTodo(this.props.id);
+    this.props.actions.toggleTodo(this.props.id, this.props.category);
   };
 
 

@@ -27,9 +27,10 @@ export function activeCategory(name) {
   }
 }
 
-export function toggleTodo(id) {
+export function toggleTodo(id, category) {
   return {
     type: 'TOGGLE_TODO',
-    id
+    id,
+    category
   }
 }

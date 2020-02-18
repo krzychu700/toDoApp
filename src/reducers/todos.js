@@ -33,7 +33,7 @@ const todos = (state = initialState, action) => {
 
     case 'TOGGLE_TODO':
       return {...state, categories: {...state.categories,
-        [state.activeCategory]: state.categories[state.activeCategory].map(todo =>
+        [action.category]: state.categories[action.category].map(todo =>
         todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
       )}}
     default:

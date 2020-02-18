@@ -59,7 +59,7 @@ class ListItems extends Component {
             <div className="allTasks_container">
               {this.props.toDoData.categories[this.props.toDoData.activeCategory].length > 0 ? "" : "This category is empty"}
               {this.props.toDoData.categories[this.props.toDoData.activeCategory].map(element => (
-                <Item key={element.id} text={element.text} id={element.id} completed={element.completed}/>
+                <Item key={element.id} text={element.text} id={element.id} completed={element.completed} category={this.props.toDoData.activeCategory}/>
               ))}
             </div>
           </>
@@ -71,7 +71,7 @@ class ListItems extends Component {
                 <p className="list_category_text">{category}</p>
                   <div className="list_item">
                     {this.props.toDoData.categories[category].map(element => (
-                      <Item key={element.id} text={element.text}/>
+                      <Item key={element.id} text={element.text} id={element.id} completed={element.completed} category={category}/>
                     ))}
                   </div>
               </div>
