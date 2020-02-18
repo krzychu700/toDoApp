@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Item } from "../components/Item";
+import Item  from "../components/Item";
 import * as actions from "../actions/index";
 import { bindActionCreators } from "redux";
 
@@ -59,7 +59,7 @@ class ListItems extends Component {
             <div className="allTasks_container">
               {this.props.toDoData.categories[this.props.toDoData.activeCategory].length > 0 ? "" : "This category is empty"}
               {this.props.toDoData.categories[this.props.toDoData.activeCategory].map(element => (
-                <Item key={element.id} text={element.text}/>
+                <Item key={element.id} text={element.text} id={element.id} completed={element.completed}/>
               ))}
             </div>
           </>

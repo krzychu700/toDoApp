@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import * as actions from "../actions/index";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder } from '@fortawesome/free-regular-svg-icons';
-import { faPlus} from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTasks} from '@fortawesome/free-solid-svg-icons';
 import ListItems from "./ListItems";
 import "./style.scss";
 
@@ -73,7 +73,7 @@ class AddTodo extends Component {
             className={this.props.toDoData.activeCategory === "All tasks" ? "category_container category_container-active" : "category_container"}
             onClick={this.handleCategoryActiveChange}
             id={"All tasks"}>
-            <FontAwesomeIcon icon={faFolder} className="category_icon"/>
+            <FontAwesomeIcon icon={faTasks} className="category_icon"/>
             <p className="category_text">All tasks</p>
           </div>
 

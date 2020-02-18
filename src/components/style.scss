@@ -8,4 +8,36 @@
   color: white;
   border-radius: 20px;
   margin: 10px;
+  position: relative;
+}
+
+.item_container-completed {
+  background-color: yellowgreen;
+  .item_icon-done {
+    color: rgb(33, 216, 58);
+  }
+}
+
+.item_iconContainer {
+  position: absolute;
+  right: 0;
+  width: 60px;
+}
+
+.item_icon {
+  margin-right: 15px;
+  color: #666;
+  cursor: pointer;
+}
+
+.item_icon-done {
+  &:hover{
+    color: rgb(33, 216, 58);
+  }
+}
+
+.item_icon-trash {
+  &:hover {
+    color: rgb(175, 26, 26);
+  }
 }
