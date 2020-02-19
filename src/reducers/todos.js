@@ -2,6 +2,7 @@ const initialState = {
   categories:{
     default: [],
   },
+  deleted: [],
   activeCategory: 'default',
 }
 const todos = (state = initialState, action) => {
@@ -12,7 +13,8 @@ const todos = (state = initialState, action) => {
         [searchingCategory]: [...state.categories[searchingCategory], {
           id: action.id,
           text: action.text,
-          completed: false
+          completed: false,
+          deleted: false
       }]}
       }
     }
@@ -36,6 +38,22 @@ const todos = (state = initialState, action) => {
         [action.category]: state.categories[action.category].map(todo =>
         todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
       )}}
+
+    case 'DELETE_TASK': {
+      const filteredTasks = state.categories[action.category].filter(task => task.id !== action.id)
+      const deletedTask = state.categories[action.category].filter(task => task.id === action.id)
+
+      return {...state,
+        categories: {...state.categories,
+        [action.category]:  filteredTasks
+        },
+        deleted: [...state.deleted, {
+          id: deletedTask[0].id,
+          text: deletedTask[0].text,
+          completed: deletedTask[0].completed,
+          deleted: true
+        }]}
+        }
     default:
       return state
   }

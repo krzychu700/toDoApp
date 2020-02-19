@@ -48,7 +48,7 @@ class ListItems extends Component {
   render() {
     return (
       <>
-        {this.props.toDoData.activeCategory !== "All tasks" &&
+        {(this.props.toDoData.activeCategory !== "All tasks" && this.props.toDoData.activeCategory !== "Deleted" ) &&
           <>
             <div className="newTask_container">
               Add new task
@@ -77,6 +77,16 @@ class ListItems extends Component {
               </div>
               
             ))}
+          </>
+        }
+        {this.props.toDoData.activeCategory === "Deleted" &&
+          <>
+            <div className="allTasks_container">
+              {this.props.toDoData.deleted.length > 0 ? "" : "This category is empty"}
+              {this.props.toDoData.deleted.map(element => (
+                <Item key={element.id} text={element.text} id={element.id} completed={element.completed} category={this.props.toDoData.activeCategory}/>
+              ))}
+            </div>
           </>
         }
       </>

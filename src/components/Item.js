@@ -13,6 +13,10 @@ class Item extends Component {
     this.props.actions.toggleTodo(this.props.id, this.props.category);
   };
 
+  handleDeleteTask = () => {
+    this.props.actions.deleteTask(this.props.id, this.props.category);
+  };
+
 
   render() {
     return (
@@ -20,7 +24,7 @@ class Item extends Component {
         <p>{this.props.text}</p>
         <div className="item_iconContainer">
           <FontAwesomeIcon icon={faCheck} className="item_icon item_icon-done" onClick={this.handleCompleteTask}/>
-          <FontAwesomeIcon icon={faTrashAlt} className="item_icon item_icon-trash"/>
+          <FontAwesomeIcon icon={faTrashAlt} className="item_icon item_icon-trash" onClick={this.handleDeleteTask}/>
         </div>
       </div>
     );

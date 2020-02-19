@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import * as actions from "../actions/index";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder } from '@fortawesome/free-regular-svg-icons';
-import { faPlus, faTasks} from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTasks, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import ListItems from "./ListItems";
 import "./style.scss";
 
@@ -39,6 +39,7 @@ class AddTodo extends Component {
   }
 
   handleCategoryActiveChange = (e) => {
+    console.log(e.target.id)
     this.props.actions.activeCategory(e.target.id)
   }
 
@@ -75,6 +76,14 @@ class AddTodo extends Component {
             id={"All tasks"}>
             <FontAwesomeIcon icon={faTasks} className="category_icon"/>
             <p className="category_text">All tasks</p>
+          </div>
+
+          <div
+            className={this.props.toDoData.activeCategory === "Deleted" ? "category_container category_container-active" : "category_container"}
+            onClick={this.handleCategoryActiveChange}
+            id={"Deleted"}>
+            <FontAwesomeIcon icon={faTrashAlt} className="category_icon"/>
+            <p className="category_text">Deleted tasks</p>
           </div>
 
           <p className="sidebar_text">categories</p>

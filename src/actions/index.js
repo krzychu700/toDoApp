@@ -3,6 +3,7 @@ export const ADD_TODO = "ADD_TODO"
 export const ADD_CATEGORY = "ADD_CATEGORY"
 export const ACTIVE_CATEGORY = "ACTIVE_CATEGORY"
 export const TOGGLE_TODO = "TOGGLE_TODO"
+export const DELETE_TASK = "DELETE_TASK"
 
 export function addTodo(text) {
   return {
@@ -30,6 +31,14 @@ export function activeCategory(name) {
 export function toggleTodo(id, category) {
   return {
     type: 'TOGGLE_TODO',
+    id,
+    category
+  }
+}
+
+export function deleteTask(id, category) {
+  return {
+    type: 'DELETE_TASK',
     id,
     category
   }
