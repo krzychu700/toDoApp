@@ -20,7 +20,7 @@ class Item extends Component {
 
   render() {
     return (
-      <div className={this.props.completed ? "item_container item_container-completed" : "item_container" }>
+      <div className={this.props.completed ? "item_container item_container-completed" : this.props.deleted ? "item_container item_container-deleted" : "item_container"}>
         <p>{this.props.text}</p>
         <div className="item_iconContainer">
           <FontAwesomeIcon icon={faCheck} className="item_icon item_icon-done" onClick={this.handleCompleteTask}/>

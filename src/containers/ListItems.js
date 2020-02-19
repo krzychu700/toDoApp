@@ -84,7 +84,7 @@ class ListItems extends Component {
             <div className="allTasks_container">
               {this.props.toDoData.deleted.length > 0 ? "" : "This category is empty"}
               {this.props.toDoData.deleted.map(element => (
-                <Item key={element.id} text={element.text} id={element.id} completed={element.completed} category={this.props.toDoData.activeCategory}/>
+                <Item key={element.id} text={element.text} id={element.id} completed={element.completed} category={this.props.toDoData.activeCategory} deleted={element.deleted}/>
               ))}
             </div>
           </>

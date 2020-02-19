@@ -41,3 +41,11 @@
     color: rgb(175, 26, 26);
   }
 }
+
+.item_container-deleted {
+  background-color: red;
+
+  .item_icon-done, .item_icon-trash {
+    display: none;
+  }
+}
